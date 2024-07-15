@@ -13,7 +13,7 @@ const LogoTicker = () => {
   return (
     <div className="bg-black text-white py-[72px]">
       <div className="container">
-        <h2 className="text-xl text-center text-white/70">Trusted by the world's most innovative teams</h2>
+        <h2 className="text-xl text-center text-white/70">Trusted by the world&apos;s most innovative teams</h2>
 
         <Carousel imageUrls={imageUrls} />
       </div>
