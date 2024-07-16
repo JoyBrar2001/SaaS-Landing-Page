@@ -16,7 +16,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
       <body
         className={clsx(
           inter.className,
-          "antialiased"
+          "antialiased overflow-x-hidden"
         )}
       >
         {children}
