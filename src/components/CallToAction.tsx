@@ -1,25 +1,58 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Button from "./Button";
 import helixImage from "../assets/images/helix2.png";
 import emojiStarImage from "../assets/images/emojistar.png";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
 const CallToAction = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end end"]
+  });
+
+  const translateY = useTransform(scrollYProgress, [0, 1], [80, -40]);
+
   return (
-    <div className="bg-black text-white py-[72px] sm:py-24 text-center">
+    <div
+      ref={containerRef}
+      className="bg-black text-white py-[72px] sm:py-24 text-center"
+    >
       <div className="container max-w-xl relative">
-        <Image 
-          src={helixImage}
-          alt="helix"
-          className="absolute top-6 left-[calc(100%+36px)]"
-        />
-        <Image 
-          src={emojiStarImage}
-          alt="emojiStar"
-          className="absolute -top-[120px] right-[calc(100%+24px)]"
-        />
+        <motion.div
+          style={{ translateY }}
+          drag
+          dragConstraints={{ top: 0, right: 0, bottom: 0, left: 0 }}
+          dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+          dragElastic={0.5}
+          className="cursor-grab active:cursor-grabbing touch-none"
+        >
+          <Image
+            src={helixImage}
+            alt="helix"
+            className="absolute top-6 left-[calc(100%+36px)]"
+            draggable={false}
+          />
+        </motion.div>
+
+        <motion.div
+          style={{ translateY }}
+          drag
+          dragConstraints={{ top: 0, right: 0, bottom: 0, left: 0 }}
+          dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+          dragElastic={0.5}
+          className="cursor-grab active:cursor-grabbing touch-none"
+        >
+          <Image
+            src={emojiStarImage}
+            alt="emojiStar"
+            className="absolute -top-[120px] right-[calc(100%+24px)]"
+            draggable={false}
+          />
+        </motion.div>
 
         <h2 className="font-bold text-5xl sm:text-6xl tracking-tighter">Get instant access</h2>
 
